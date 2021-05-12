@@ -14,7 +14,7 @@ export class NotificationService {
       text: message,
       duration: 4000,
       close: true,
-      backgroundColor: "linear-gradient(to right, #FA8072, #E9967A)",
+      backgroundColor: 'linear-gradient(to right, #FA8072, #E9967A)',
       stopOnFocus: true,
     }).showToast();
   }

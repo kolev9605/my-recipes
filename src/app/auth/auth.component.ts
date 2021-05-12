@@ -7,7 +7,7 @@ import { Observable, Subject, Subscription, SubscriptionLike } from 'rxjs';
 import { AuthService } from '../shared/services/auth.service';
 import { SpinnerService } from '../shared/services/spinner.service';
 import { NotificationService } from '../shared/services/notification.service';
-import { ConfirmSignUp, UserSignIn, UserSignUp } from '../shared/services/user.model';
+import { ConfirmSignUp, UserSignIn, UserSignUp } from '../shared/models/user.model';
 import { Router } from '@angular/router';
 
 @Component({

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { from, Subject, Subscription } from 'rxjs';
+import { from, Observable, Subject, Subscription } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
 import { Auth, Hub } from 'aws-amplify';
-import { UserSignUp, UserSignIn, ConfirmSignUp } from './user.model';
+import { UserSignUp, UserSignIn, ConfirmSignUp } from '../models/user.model';
 import { BehaviorSubject } from 'rxjs';
 import { ErrorService } from '../services/error.service';
 import { OnDestroy } from '@angular/core';
@@ -22,7 +22,7 @@ export class AuthService implements OnDestroy {
     Hub.listen('auth', (data) => {
       const { payload } = data;
 
-      console.log('event:', payload.event)
+      console.log('event:', payload.event);
       switch (payload.event) {
         case 'signIn':
           console.log('user signed in');
@@ -49,32 +49,32 @@ export class AuthService implements OnDestroy {
     });
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     if (this.currentUserSubscription) {
       this.currentUserSubscription.unsubscribe();
     }
   }
 
-  onAuthEvent(payload) {
+  onAuthEvent(payload): void {
     console.log('auth state changed', payload);
     this.userSubject.next(payload.data);
     // ... your implementation
   }
 
-  onSignedOut(payload) {
+  onSignedOut(payload): void {
     console.log('auth state changed', payload);
     this.userSubject.next(null);
     // ... your implementation
   }
 
-  onSignInFailure(payload) {
+  onSignInFailure(payload): void {
     console.log('auth state changed', payload);
-    //todo add something that indicates error
+    // todo add something that indicates error
     this.userSubject.next(null);
     // ... your implementation
   }
 
-  signUp(user: UserSignUp) {
+  signUp(user: UserSignUp): Observable<any> {
     const signUpObservable = from(Auth.signUp({
       username: user.username,
       password: user.password,
@@ -88,7 +88,7 @@ export class AuthService implements OnDestroy {
     return signUpObservable;
   }
 
-  signIn(user: UserSignIn) {
+  signIn(user: UserSignIn): Observable<any> {
     const signInObservable = from(Auth.signIn(user)).pipe(
       catchError(this.errorService.handleError)
     );

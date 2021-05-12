@@ -8,12 +8,12 @@ import { AuthService } from './shared/services/auth.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+  title = 'my-recipes';
+
   constructor(private authService: AuthService) {
   }
 
   ngOnInit(): void {
     this.authService.tryLogin();
   }
-
-  title = 'my-recipes';
 }
