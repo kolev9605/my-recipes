@@ -10,6 +10,7 @@
     <mat-nav-list>
       <!-- <a mat-list-item routerLink="/">Home</a> -->
       <a mat-list-item routerLink="/recipes">Recipes</a>
+      <a mat-list-item routerLink="/sign-in">Login</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -22,9 +23,12 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <!-- <a mat-button routerLink="/" *ngIf="!(isHandset$ | async)">my-recipes</a> -->
-      <a mat-button routerLink="/recipes" *ngIf="!(isHandset$ | async)">Recipes</a>
+      <a mat-button routerLink="/recipes" *ngIf="isAuthenticated && !(isHandset$ | async)">Recipes</a>
+      <a mat-button routerLink="/sign-in" *ngIf="!isAuthenticated && !(isHandset$ | async)">Sign in</a>
+
       <span class="example-spacer"></span>
+      <span *ngIf="isAuthenticated">{{username}}</span>
+      <button (click)="signOut()" *ngIf="isAuthenticated">Sign Out</button>
     </mat-toolbar>
 
     <!-- Add Content Here -->
