@@ -23,7 +23,7 @@
     "@angular/platform-browser-dynamic": "~11.2.14",
     "@angular/router": "~11.2.14",
     "@aws-amplify/ui-angular": "^0.4.19",
-    "aws-amplify": "^3.3.16",
+    "aws-amplify": "^3.4.2",
     "rxjs": "~6.5.5",
     "toastify-js": "^1.11.0",
     "tslib": "^2.0.0",
