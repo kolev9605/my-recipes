@@ -1,7 +1,6 @@
 
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CognitoUserInterface, AuthState } from "@aws-amplify/ui-components";
 import { Observable, Subject, Subscription, SubscriptionLike } from 'rxjs';
 
 import { AuthService } from '../shared/services/auth.service';
@@ -77,7 +76,7 @@ export class AuthComponent implements OnInit, OnDestroy {
     this.signInSubscription = this.authService.signIn(userSignIn).subscribe(authResponse => {
       console.log('signed in!', authResponse);
       this.spinnerService.hide();
-      this.router.navigate(['/recipes'])
+      this.router.navigate(['/recipes']);
     }, error => {
       this.spinnerService.hide();
       this.notificationService.showError(error);
@@ -105,7 +104,7 @@ export class AuthComponent implements OnInit, OnDestroy {
     this.confirmSignUpSubscription = this.authService.confirmSignUp(confirmSignUp).subscribe(confirirmResponse => {
       console.log('confirmed!', confirirmResponse);
       this.spinnerService.hide();
-      this.router.navigate(['/recipes'])
+      this.router.navigate(['/recipes']);
 
     }, error => {
       this.spinnerService.hide();

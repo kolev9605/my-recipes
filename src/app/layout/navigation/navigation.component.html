@@ -23,8 +23,8 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <a mat-button routerLink="/recipes" *ngIf="isAuthenticated && !(isHandset$ | async)">Recipes</a>
-      <a mat-button routerLink="/sign-in" *ngIf="!isAuthenticated && !(isHandset$ | async)">Sign in</a>
+      <a mat-button routerLink="/recipes" *ngIf="isAuthenticated && (isHandset$ | async) === false">Recipes</a>
+      <a mat-button routerLink="/sign-in" *ngIf="!isAuthenticated && (isHandset$ | async) === false">Sign in</a>
 
       <span class="example-spacer"></span>
       <span *ngIf="isAuthenticated">{{username}}</span>
