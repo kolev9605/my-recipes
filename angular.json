@@ -32,7 +32,25 @@
               "./node_modules/toastify-js/src/toastify.css",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": [
+              "axios",
+              "@aws-crypto/sha256-js",
+              "uuid",
+              "buffer",
+              "ulid",
+              "lodash/isEqual",
+              "lodash/get",
+              "crypto-js/hmac-sha256",
+              "crypto-js/lib-typedarrays",
+              "zen-observable",
+              "js-cookie",
+              "isomorphic-unfetch",
+              "@aws-crypto/crc32",
+              "@aws-crypto/sha256-browser",
+              "fast-xml-parser",
+              "lodash/isEmpty"
+            ]
           },
           "configurations": {
             "production": {
