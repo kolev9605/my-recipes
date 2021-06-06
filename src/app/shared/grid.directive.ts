@@ -11,7 +11,7 @@ export interface GridColumns {
 }
 
 @Directive({
-  selector: '[appGgridCols]',
+  selector: '[gridCols]'
 })
 export class GridDirective implements OnInit {
   private gridCols: GridColumns = {xs: 1, sm: 2, md: 4, lg: 6, xl: 8};
@@ -20,7 +20,7 @@ export class GridDirective implements OnInit {
     return this.gridCols;
   }
 
-  @Input('appGgridCols')
+  @Input('gridCols')
   public set cols(map: GridColumns) {
     if (map && ('object' === (typeof map))) {
       this.gridCols = map;

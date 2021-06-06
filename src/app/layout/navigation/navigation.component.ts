@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
 export class NavigationComponent implements OnInit, OnDestroy {
 
   isHandset$: Observable<boolean>;
-  username = 'none';
+  username: string = 'none';
   isAuthenticated: boolean;
   signOutSubscription: Subscription;
 
@@ -39,7 +39,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
       console.log('subject fired: ', user);
       this.isAuthenticated = !!user;
       if (this.isAuthenticated) {
-        this.username = user.username;
+        this.username = user.username
       }
     });
   }
@@ -54,7 +54,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
     this.signOutSubscription = this.authService.signOut().subscribe(lougoutResponse => {
       console.log('logged out!', lougoutResponse);
       this.spinnerService.hide();
-      this.router.navigate(['/sign-in']);
+      this.router.navigate(['/sign-in'])
 
     }, error => {
       this.spinnerService.hide();

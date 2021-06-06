@@ -9,7 +9,7 @@ export class NotificationService {
   constructor() {
   }
 
-  showError(message: string) {
+  showError(message:string) {
     Toastify({
       text: message,
       duration: 4000,
@@ -19,7 +19,7 @@ export class NotificationService {
     }).showToast();
   }
 
-  showSuccess(message: string) {
+  showSuccess(message:string) {
     Toastify({
       text: message,
       duration: 4000,

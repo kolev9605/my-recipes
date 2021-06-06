@@ -122,8 +122,7 @@ export class AuthService implements OnDestroy {
     //   this.userSubject.next(null);
     // }
     // Auth.currentAuthenticatedUser({
-    //   bypassCache: false
-    // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
+    //   bypassCache: false  // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
     // }).then(user => {
     //   console.log('currentUser', user);
     //   this.userSubject.next(user);
@@ -140,7 +139,7 @@ export class AuthService implements OnDestroy {
     },
       err => {
         this.userSubject.next(null);
-        console.log('current user not found', err);
+        console.log('current user not found', err)
       });
   }
 }

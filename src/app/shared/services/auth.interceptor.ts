@@ -13,17 +13,18 @@ export class AuthInterceptor implements HttpInterceptor {
     return this.authService.userSubject.pipe(
       take(1),
       exhaustMap(user => {
-        if(!user) {
-          return next.handle(req);
-        }
+        return next.handle(req);
+        // if(!user) {
+        //   return next.handle(req);
+        // }
 
-        const modifiedRequest = req.clone({
-          // setHeaders: {
-          //   Authorization: `Bearer ${user.token}`
-          // }
-        });
+        // const modifiedRequest = req.clone({
+        //   setHeaders: {
+        //     Authorization: `Bearer ${user.token}`
+        //   }
+        // });
 
-        return next.handle(modifiedRequest);
+        //return next.handle(modifiedRequest);
       })
     );
   }
