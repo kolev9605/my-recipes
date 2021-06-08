@@ -1,11 +1,12 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav
-      #drawer
-      class="sidenav"
-      fixedInViewport="false"
-      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-      [mode]="(isHandset$ | async) ? 'over' : 'side'"
-      [opened]="false">
+    #drawer
+    class="sidenav"
+    fixedInViewport="false"
+    [attr.role]="(isHandset$ | async) === true ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="false"
+  >
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
       <!-- <a mat-list-item routerLink="/">Home</a> -->
@@ -20,14 +21,25 @@
         aria-label="Toggle sidenav"
         mat-icon-button
         (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async">
+        *ngIf="isHandset$ | async"
+      >
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <a mat-button routerLink="/recipes" *ngIf="isAuthenticated && !(isHandset$ | async)">Recipes</a>
-      <a mat-button routerLink="/sign-in" *ngIf="!isAuthenticated && !(isHandset$ | async)">Sign in</a>
+      <a
+        mat-button
+        routerLink="/recipes"
+        *ngIf="isAuthenticated && (isHandset$ | async) === false"
+        >Recipes</a
+      >
+      <a
+        mat-button
+        routerLink="/sign-in"
+        *ngIf="!isAuthenticated && (isHandset$ | async) === false"
+        >Sign in</a
+      >
 
       <span class="example-spacer"></span>
-      <span *ngIf="isAuthenticated">{{username}}</span>
+      <span *ngIf="isAuthenticated">{{ username }}</span>
       <button (click)="signOut()" *ngIf="isAuthenticated">Sign Out</button>
     </mat-toolbar>
 

@@ -2,14 +2,12 @@ import { Injectable } from '@angular/core';
 import Toastify from 'toastify-js';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class NotificationService {
+  constructor() {}
 
-  constructor() {
-  }
-
-  showError(message:string) {
+  showError(message: string) {
     Toastify({
       text: message,
       duration: 4000,
@@ -19,12 +17,12 @@ export class NotificationService {
     }).showToast();
   }
 
-  showSuccess(message:string) {
+  showSuccess(message: string) {
     Toastify({
       text: message,
       duration: 4000,
       close: true,
-      stopOnFocus: true
+      stopOnFocus: true,
     }).showToast();
   }
 }

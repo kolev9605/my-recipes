@@ -4,7 +4,7 @@ import { ComponentPortal } from '@angular/cdk/portal';
 import { ProgressSpinnerComponent } from '../components/progress-spinner/progress-spinner.component';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SpinnerService {
   overlayContainer;
@@ -16,7 +16,7 @@ export class SpinnerService {
         .global()
         .centerHorizontally()
         .centerVertically(),
-      hasBackdrop: true
+      hasBackdrop: true,
     });
   }
 

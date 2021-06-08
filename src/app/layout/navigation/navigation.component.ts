@@ -10,38 +10,39 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
-  styleUrls: ['./navigation.component.scss']
+  styleUrls: ['./navigation.component.scss'],
 })
 export class NavigationComponent implements OnInit, OnDestroy {
-
   isHandset$: Observable<boolean>;
-  username: string = 'none';
+  username = 'none';
   isAuthenticated: boolean;
   signOutSubscription: Subscription;
 
-
-  constructor(private breakpointObserver: BreakpointObserver,
+  constructor(
+    private breakpointObserver: BreakpointObserver,
     private authService: AuthService,
     private spinnerService: SpinnerService,
     private notificationService: NotificationService,
-    private router: Router) { }
+    private router: Router,
+  ) {}
 
   ngOnInit(): void {
     this.isAuthenticated = false;
 
-    this.isHandset$ = this.breakpointObserver.observe(Breakpoints.Handset)
-      .pipe(
-        map(result => result.matches),
-        shareReplay()
-      );
+    this.isHandset$ = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
+      map((result) => result.matches),
+      shareReplay(),
+    );
 
-    this.signOutSubscription = this.authService.userSubject.subscribe(user => {
-      console.log('subject fired: ', user);
-      this.isAuthenticated = !!user;
-      if (this.isAuthenticated) {
-        this.username = user.username
-      }
-    });
+    this.signOutSubscription = this.authService.userSubject.subscribe(
+      (user) => {
+        console.log('subject fired: ', user);
+        this.isAuthenticated = !!user;
+        if (this.isAuthenticated) {
+          this.username = user.username;
+        }
+      },
+    );
   }
 
   ngOnDestroy(): void {
@@ -51,15 +52,16 @@ export class NavigationComponent implements OnInit, OnDestroy {
   signOut() {
     this.spinnerService.show();
 
-    this.signOutSubscription = this.authService.signOut().subscribe(lougoutResponse => {
-      console.log('logged out!', lougoutResponse);
-      this.spinnerService.hide();
-      this.router.navigate(['/sign-in'])
-
-    }, error => {
-      this.spinnerService.hide();
-      this.notificationService.showError(error);
-    });
+    this.signOutSubscription = this.authService.signOut().subscribe(
+      (lougoutResponse) => {
+        console.log('logged out!', lougoutResponse);
+        this.spinnerService.hide();
+        this.router.navigate(['/sign-in']);
+      },
+      (error) => {
+        this.spinnerService.hide();
+        this.notificationService.showError(error);
+      },
+    );
   }
-
 }

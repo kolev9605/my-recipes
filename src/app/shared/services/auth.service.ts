@@ -8,9 +8,8 @@ import { BehaviorSubject } from 'rxjs';
 import { ErrorService } from '../services/error.service';
 import { OnDestroy } from '@angular/core';
 
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService implements OnDestroy {
   // user: CognitoUserInterface;
@@ -45,7 +44,10 @@ export class AuthService implements OnDestroy {
         //   break;
       }
 
-      console.log('A new auth event has happened: ', data.payload.data.username + ' has ' + data.payload.event);
+      console.log(
+        'A new auth event has happened: ',
+        data.payload.data.username + ' has ' + data.payload.event,
+      );
     });
   }
 
@@ -75,38 +77,38 @@ export class AuthService implements OnDestroy {
   }
 
   signUp(user: UserSignUp): Observable<any> {
-    const signUpObservable = from(Auth.signUp({
-      username: user.username,
-      password: user.password,
-      attributes: {
-        email: user.email,
-      }
-    })).pipe(
-      catchError(this.errorService.handleError)
-    );
+    const signUpObservable = from(
+      Auth.signUp({
+        username: user.username,
+        password: user.password,
+        attributes: {
+          email: user.email,
+        },
+      }),
+    ).pipe(catchError(this.errorService.handleError));
 
     return signUpObservable;
   }
 
   signIn(user: UserSignIn): Observable<any> {
     const signInObservable = from(Auth.signIn(user)).pipe(
-      catchError(this.errorService.handleError)
+      catchError(this.errorService.handleError),
     );
 
     return signInObservable;
   }
 
   confirmSignUp(confirmSignUp: ConfirmSignUp) {
-    const confirmSignUpObservable = from(Auth.confirmSignUp(confirmSignUp.username, confirmSignUp.code)).pipe(
-      catchError(this.errorService.handleError)
-    );
+    const confirmSignUpObservable = from(
+      Auth.confirmSignUp(confirmSignUp.username, confirmSignUp.code),
+    ).pipe(catchError(this.errorService.handleError));
 
     return confirmSignUpObservable;
   }
 
   signOut() {
     const signOutObservable = from(Auth.signOut({ global: true })).pipe(
-      catchError(this.errorService.handleError)
+      catchError(this.errorService.handleError),
     );
 
     return signOutObservable;
@@ -133,13 +135,15 @@ export class AuthService implements OnDestroy {
     //   });
 
     const currentUser = from(Auth.currentAuthenticatedUser());
-    this.currentUserSubscription = currentUser.subscribe(res => {
-      console.log('currentUser', res);
-      this.userSubject.next(res);
-    },
-      err => {
+    this.currentUserSubscription = currentUser.subscribe(
+      (res) => {
+        console.log('currentUser', res);
+        this.userSubject.next(res);
+      },
+      (err) => {
         this.userSubject.next(null);
-        console.log('current user not found', err)
-      });
+        console.log('current user not found', err);
+      },
+    );
   }
 }

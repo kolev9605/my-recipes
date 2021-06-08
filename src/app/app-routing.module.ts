@@ -9,11 +9,10 @@ const routes: Routes = [
   { path: '', component: TestComponent },
   { path: 'recipes', component: RecipesComponent, canActivate: [AuthGuard] },
   { path: 'sign-in', component: AuthComponent },
-
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
