@@ -6,8 +6,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./progress-spinner.component.css'],
 })
 export class ProgressSpinnerComponent implements OnInit {
-  constructor() {}
-
   ngOnInit() {
     console.log('not empty ngoninit');
   }

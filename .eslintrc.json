@@ -30,8 +30,7 @@
             "prefix": "app",
             "style": "camelCase"
           }
-        ],
-        "no-unused-vars": [2, { "vars": "all", "args": "after-used" }]
+        ]
       }
     },
     {

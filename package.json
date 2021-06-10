@@ -69,7 +69,6 @@
     "stream": false
   },
   "lint-staged": {
-    "*.{js,css,ts,component.html}": "eslint --cache",
-    "*.{js,css,ts,component.html}": "prettier --write"
+    "*.{js,css,ts,html}": ["eslint", "prettier --write"]
   }
 }

@@ -6,16 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./test.component.scss'],
 })
 export class TestComponent implements OnInit {
-  constructor() {}
   x = 5;
 
-  ngOnInit() {
+  ngOnInit(): void {
     console.log('not empty ngoninit');
-  }
-
-  someMethod() {
-    if (this.x >= 5) {
-      console.log('hi');
-    }
   }
 }
