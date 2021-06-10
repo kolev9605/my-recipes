@@ -8,8 +8,10 @@
         "project": ["tsconfig.json", "e2e/tsconfig.json"],
         "createDefaultProgram": true
       },
+      "plugins": ["sonarjs"],
       "extends": [
         "plugin:@angular-eslint/recommended",
+        "plugin:sonarjs/recommended",
         "plugin:prettier/recommended"
       ],
       "rules": {
@@ -28,11 +30,13 @@
             "prefix": "app",
             "style": "camelCase"
           }
-        ]
+        ],
+        "no-unused-vars": [2, { "vars": "all", "args": "after-used" }]
       }
     },
     {
       "files": ["*.html"],
+      "plugins": ["sonarjs"],
       "extends": [
         "plugin:@angular-eslint/template/recommended",
         "plugin:prettier/recommended"

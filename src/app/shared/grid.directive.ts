@@ -15,7 +15,6 @@ export interface GridColumns {
 })
 export class GridDirective implements OnInit {
   private gridCols: GridColumns = { xs: 1, sm: 2, md: 4, lg: 6, xl: 8 };
-
   public get cols(): GridColumns {
     return this.gridCols;
   }
