@@ -15,6 +15,7 @@ export class AuthService implements OnDestroy {
   // user: CognitoUserInterface;
   // authState: AuthState;
   userSubject = new Subject<any>();
+  x;
   currentUserSubscription: Subscription;
 
   constructor(private errorService: ErrorService) {
