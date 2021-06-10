@@ -17,7 +17,7 @@ import { NavigationComponent } from './layout/navigation/navigation.component';
 import { AuthComponent } from './auth/auth.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ProgressSpinnerComponent } from './shared/components/progress-spinner/progress-spinner.component';
-import { OverlayModule, OverlayRef } from '@angular/cdk/overlay'
+import { OverlayModule, OverlayRef } from '@angular/cdk/overlay';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './shared/services/auth.interceptor';
 
@@ -47,10 +47,10 @@ Amplify.configure(awsconfig);
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
-      multi: true
-    }
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
-  entryComponents: [ProgressSpinnerComponent]
+  entryComponents: [ProgressSpinnerComponent],
 })
-export class AppModule { }
+export class AppModule {}

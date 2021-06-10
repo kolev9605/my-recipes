@@ -1,21 +1,20 @@
 import { Injectable } from '@angular/core';
 import { from, Observable, Subject, Subscription } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 
 import { Auth, Hub } from 'aws-amplify';
 import { UserSignUp, UserSignIn, ConfirmSignUp } from '../models/user.model';
-import { BehaviorSubject } from 'rxjs';
 import { ErrorService } from '../services/error.service';
 import { OnDestroy } from '@angular/core';
 
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService implements OnDestroy {
   // user: CognitoUserInterface;
   // authState: AuthState;
   userSubject = new Subject<any>();
+  x;
   currentUserSubscription: Subscription;
 
   constructor(private errorService: ErrorService) {
@@ -45,7 +44,10 @@ export class AuthService implements OnDestroy {
         //   break;
       }
 
-      console.log('A new auth event has happened: ', data.payload.data.username + ' has ' + data.payload.event);
+      console.log(
+        'A new auth event has happened: ',
+        data.payload.data.username + ' has ' + data.payload.event,
+      );
     });
   }
 
@@ -55,91 +57,66 @@ export class AuthService implements OnDestroy {
     }
   }
 
-  onAuthEvent(payload): void {
-    console.log('auth state changed', payload);
+  onAuthEvent(payload: any): void {
+    console.log('auth state changed onAuthEvent', payload);
     this.userSubject.next(payload.data);
     // ... your implementation
   }
 
-  onSignedOut(payload): void {
-    console.log('auth state changed', payload);
+  onSignedOut(payload: any): void {
+    console.log('auth state changed onSignedOut', payload);
     this.userSubject.next(null);
     // ... your implementation
   }
 
-  onSignInFailure(payload): void {
-    console.log('auth state changed', payload);
+  onSignInFailure(payload: any): void {
+    console.log('auth state changed onSignInFailure', payload);
     // todo add something that indicates error
     this.userSubject.next(null);
     // ... your implementation
   }
 
   signUp(user: UserSignUp): Observable<any> {
-    const signUpObservable = from(Auth.signUp({
-      username: user.username,
-      password: user.password,
-      attributes: {
-        email: user.email,
-      }
-    })).pipe(
-      catchError(this.errorService.handleError)
-    );
-
-    return signUpObservable;
+    return from(
+      Auth.signUp({
+        username: user.username,
+        password: user.password,
+        attributes: {
+          email: user.email,
+        },
+      }),
+    ).pipe(catchError(this.errorService.handleError));
   }
 
   signIn(user: UserSignIn): Observable<any> {
-    const signInObservable = from(Auth.signIn(user)).pipe(
-      catchError(this.errorService.handleError)
+    return from(Auth.signIn(user)).pipe(
+      catchError(this.errorService.handleError),
     );
-
-    return signInObservable;
   }
 
-  confirmSignUp(confirmSignUp: ConfirmSignUp) {
-    const confirmSignUpObservable = from(Auth.confirmSignUp(confirmSignUp.username, confirmSignUp.code)).pipe(
-      catchError(this.errorService.handleError)
-    );
-
-    return confirmSignUpObservable;
+  confirmSignUp(confirmSignUp: ConfirmSignUp): Observable<any> {
+    return from(
+      Auth.confirmSignUp(confirmSignUp.username, confirmSignUp.code),
+    ).pipe(catchError(this.errorService.handleError));
   }
 
-  signOut() {
-    const signOutObservable = from(Auth.signOut({ global: true })).pipe(
-      catchError(this.errorService.handleError)
+  signOut(): Observable<any> {
+    return from(Auth.signOut({ global: true })).pipe(
+      catchError(this.errorService.handleError),
     );
-
-    return signOutObservable;
   }
 
-  tryLogin() {
-    // const currentUser = await Auth.currentAuthenticatedUser();
-    // console.log('user++', currentUser);
-
-    // if (currentUser) {
-    //   this.userSubject.next(currentUser);
-    // } else {
-    //   this.userSubject.next(null);
-    // }
-    // Auth.currentAuthenticatedUser({
-    //   bypassCache: false  // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
-    // }).then(user => {
-    //   console.log('currentUser', user);
-    //   this.userSubject.next(user);
-    // })
-    //   .catch(err => {
-    //     this.userSubject.next(null);
-    //     console.log('current user not found', err)
-    //   });
-
+  tryLogin(): void {
     const currentUser = from(Auth.currentAuthenticatedUser());
-    this.currentUserSubscription = currentUser.subscribe(res => {
-      console.log('currentUser', res);
-      this.userSubject.next(res);
-    },
-      err => {
+    this.currentUserSubscription = currentUser.subscribe(
+      (res) => {
+        console.log('currentUser', res);
+        this.userSubject.next(res);
+      },
+      (err) => {
         this.userSubject.next(null);
-        console.log('current user not found', err)
-      });
+        console.log('current user not found', err);
+      },
+    );
   }
 }
