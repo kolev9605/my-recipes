@@ -21,6 +21,7 @@ export class GridDirective implements OnInit {
 
   @Input('appGridCols')
   public set cols(map: GridColumns) {
+    console.log('map', map);
     if (map && 'object' === typeof map) {
       this.gridCols = map;
     }

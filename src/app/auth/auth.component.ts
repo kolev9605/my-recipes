@@ -12,6 +12,7 @@ import {
   UserSignUp,
 } from '../shared/models/user.model';
 import { Router } from '@angular/router';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 
 @Component({
   selector: 'app-auth',
@@ -134,5 +135,11 @@ export class AuthComponent implements OnInit, OnDestroy {
           this.notificationService.showError(error);
         },
       );
+  }
+
+  authModeChanged($event: MatTabChangeEvent) {
+    this.formType = $event.tab.textLabel;
+
+    console.log($event);
   }
 }

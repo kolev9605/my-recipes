@@ -1,96 +1,102 @@
-<mat-card>
-  <mat-card-title>Sign Up</mat-card-title>
-  <mat-card-content>
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
-      <div>
-        <div *ngIf="formType === 'signIn'">
-          <p>
-            <mat-form-field>
-              <input
-                type="text"
-                matInput
-                placeholder="Username"
-                formControlName="username"
-              />
-            </mat-form-field>
-          </p>
-          <p>
-            <mat-form-field>
-              <input
-                type="password"
-                matInput
-                placeholder="Password"
-                formControlName="password"
-              />
-            </mat-form-field>
-          </p>
-          <div class="button">
-            <button (click)="this.formType = 'signUp'" type="button" mat-button>
-              Go to Register
-            </button>
-            <button type="submit" mat-raised-button>Sign In</button>
-          </div>
-        </div>
+<div class="container-fluid auth-form__wrapper">
+  <div class="row">
+    <div
+      class="
+        offset-lg-4
+        col-lg-4
+        offset-md-3
+        col-md-6
+        offset-sm-2
+        col-sm-8 col-12
+      "
+    >
+      <mat-card>
+        <mat-card-title class="auth-form__title">Auth</mat-card-title>
+        <mat-card-content class="auth-form__content">
+          <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <mat-tab-group
+              mat-stretch-tabs
+              (selectedTabChange)="authModeChanged($event)"
+            >
+              <mat-tab *ngIf="formType !== 'confirmSignUp'" label="signIn">
+                <div class="auth-form__tab-wrapper">
+                  <mat-form-field>
+                    <input
+                      type="text"
+                      matInput
+                      placeholder="Username"
+                      formControlName="username"
+                    />
+                  </mat-form-field>
+                  <mat-form-field>
+                    <input
+                      type="password"
+                      matInput
+                      placeholder="Password"
+                      formControlName="password"
+                    />
+                  </mat-form-field>
+                  <div class="auth-form__buttons">
+                    <button type="submit" mat-raised-button>Sign In</button>
+                  </div>
+                </div>
+              </mat-tab>
+              <mat-tab *ngIf="formType !== 'confirmSignUp'" label="signUp">
+                <div class="auth-form__tab-wrapper">
+                  <mat-form-field>
+                    <input
+                      type="text"
+                      matInput
+                      placeholder="Username"
+                      formControlName="username"
+                    />
+                  </mat-form-field>
+                  <mat-form-field>
+                    <input
+                      type="text"
+                      matInput
+                      placeholder="Email"
+                      formControlName="email"
+                    />
+                  </mat-form-field>
+                  <mat-form-field>
+                    <input
+                      type="password"
+                      matInput
+                      placeholder="Password"
+                      formControlName="password"
+                    />
+                  </mat-form-field>
+                  <div class="auth-form__buttons">
+                    <button type="submit" mat-raised-button>Sign Up</button>
+                  </div>
+                </div>
+              </mat-tab>
+              <mat-tab
+                *ngIf="formType === 'confirmSignUp'"
+                label="confirmSignUp"
+              >
+                <div class="auth-form__tab-wrapper">
+                  <mat-form-field>
+                    <input
+                      type="text"
+                      matInput
+                      placeholder="Code"
+                      formControlName="code"
+                    />
+                  </mat-form-field>
 
-        <div *ngIf="formType === 'signUp'">
-          <p>
-            <mat-form-field>
-              <input
-                type="text"
-                matInput
-                placeholder="Username"
-                formControlName="username"
-              />
-            </mat-form-field>
-          </p>
-
-          <p>
-            <mat-form-field>
-              <input
-                type="text"
-                matInput
-                placeholder="Email"
-                formControlName="email"
-              />
-            </mat-form-field>
-          </p>
-
-          <p>
-            <mat-form-field>
-              <input
-                type="password"
-                matInput
-                placeholder="Password"
-                formControlName="password"
-              />
-            </mat-form-field>
-          </p>
-
-          <div class="button">
-            <button (click)="this.formType = 'signIn'" type="button" mat-button>
-              Go to sign in
-            </button>
-            <button type="submit" mat-raised-button>Sign Up</button>
-          </div>
-        </div>
-
-        <div *ngIf="formType === 'confirmSignUp'">
-          <p>
-            <mat-form-field>
-              <input
-                type="text"
-                matInput
-                placeholder="Code"
-                formControlName="code"
-              />
-            </mat-form-field>
-          </p>
-
-          <div class="button">
-            <button type="submit" mat-raised-button>Confirm Sign Up</button>
-          </div>
-        </div>
-      </div>
-    </form>
-  </mat-card-content>
-</mat-card>
+                  <div class="button">
+                    <button type="submit" mat-raised-button>
+                      Confirm Sign Up
+                    </button>
+                  </div>
+                </div>
+              </mat-tab>
+            </mat-tab-group>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>
